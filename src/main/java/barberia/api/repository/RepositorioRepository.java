@@ -1,8 +1,8 @@
 package barberia.api.repository;
 
-import java.util.Locale.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
+import barberia.api.entity.Repositorio;
 
-public interface RepositorioRepository extends JpaRepository<Category, Integer> {
+public interface RepositorioRepository extends JpaRepository<Repositorio, Integer> {
 
 }

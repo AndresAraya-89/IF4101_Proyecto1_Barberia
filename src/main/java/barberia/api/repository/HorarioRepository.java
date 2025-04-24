@@ -1,8 +1,8 @@
 package barberia.api.repository;
 
-import java.util.Locale.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
+import barberia.api.entity.Horario;
 
-public interface HorarioRepository extends JpaRepository<Category, Integer> {
+public interface HorarioRepository extends JpaRepository<Horario, Integer> {
 
 }
