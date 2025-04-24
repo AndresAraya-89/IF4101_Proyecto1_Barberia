@@ -22,22 +22,24 @@ public class RolService {
         return rolRepository.findAll();
     }
 
-    public Optional<Product> getById(int id) {
-        return productRepository.findById(id);
+    public Optional<Rol> getById(int id) {
+        return rolRepository.findById(id);
     }
 
     public void delete(int id) {
-        productRepository.deleteById(id);
+        rolRepository.deleteById(id);
     }
 
-    public Product update(int id, Product product) {
-        Optional<Product> existingProduct = productRepository.findById(id);
-        if (existingProduct.isPresent()) {
-            Product updatedCategory = existingProduct.get();
-            updatedCategory.setDescription(product.getDescription());
-            return productRepository.save(updatedCategory);
+    public Rol update(int id, Rol rol) {
+        Optional<Rol> existingRol = rolRepository.findById(id);
+        if (existingRol.isPresent()) {
+            Rol updatedRol = existingRol.get();
+            // Si el rol existe que realice una copia completa del objeto recibido por
+            // parametro
+            updatedRol = rol;
+            return rolRepository.save(updatedRol);
         } else {
-            throw new RuntimeException("Categoría no encontrada con ID: " + id);
+            throw new RuntimeException("Rol no encontrada con ID: " + id);
         }
     }
 }
