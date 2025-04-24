@@ -1,4 +1,4 @@
-package barberia.service;
+package barberia.api.service;
 
 import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
