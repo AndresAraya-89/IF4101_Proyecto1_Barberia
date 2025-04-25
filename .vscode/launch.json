@@ -9,6 +9,16 @@
             "projectName": "api",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-BarberiaApplication<barberia>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "barberia.api.BarberiaApplication",
+            "projectName": "barberia",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }
