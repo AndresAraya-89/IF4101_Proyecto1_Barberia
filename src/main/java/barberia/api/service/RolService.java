@@ -30,6 +30,7 @@ public class RolService {
         rolRepository.deleteById(id);
     }
 
+    //Metodo que actualiza el rol mediante una consulta con el id
     public Rol update(int id, Rol rol) {
         Optional<Rol> existingRol = rolRepository.findById(id);
         if (existingRol.isPresent()) {
