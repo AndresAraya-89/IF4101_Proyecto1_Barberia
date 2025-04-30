@@ -1,0 +1,147 @@
+/* Paleta de colores basada en Casa Fuertes (Elegancia Clásica & Discreta) */
+:root {
+    --blanco: #F8F8F8;
+    --negro: #1C1C1C;
+    --verde-oscuro: #4A5A48;
+    --verde-cazador: #355e3b;
+    --cafe-tabaco: #8B5E3C;
+    --dorado-opaco: #C2A878;
+
+    --font-titulos: 'Libre Baskerville', serif;
+    --font-texto: 'Lora', serif;
+}
+
+/* Reset de márgenes y paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--blanco);
+    color: var(--negro);
+    font-family: var(--font-texto);
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* Títulos */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-titulos);
+    color: var(--negro);
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+    color: var(--dorado-opaco);
+}
+
+p {
+    font-size: 1.1rem;
+    color: var(--negro);
+    margin-bottom: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Botón primario */
+.btn-primary {
+    background-color: var(--dorado-opaco);
+    color: var(--negro);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    font-family: var(--font-titulos);
+    font-weight: bold;
+    display: inline-block;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--verde-cazador);
+    color: var(--blanco);
+}
+
+/* Header */
+.header {
+    background-color: var(--verde-oscuro);
+    padding: 20px;
+    text-align: center;
+}
+
+.header h1 {
+    color: var(--blanco);
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: center;
+    background-color: var(--cafe-tabaco);
+    padding: 10px 0;
+}
+
+.navbar a {
+    color: var(--blanco);
+    text-decoration: none;
+    padding: 0 15px;
+    font-weight: bold;
+}
+
+.navbar a:hover {
+    color: var(--dorado-opaco);
+}
+
+/* Footer */
+.footer {
+    background-color: var(--verde-oscuro);
+    color: var(--blanco);
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    font-size: 0.9rem;
+}
+
+.hero {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.hero-text {
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+    color: var(--negro);
+}
+
+.button {
+    background-color: var(--dorado-opaco);
+    color: var(--negro);
+    padding: 12px 30px;
+    border: none;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.button:hover {
+    background-color: var(--verde-cazador);
+    color: var(--blanco);
+}

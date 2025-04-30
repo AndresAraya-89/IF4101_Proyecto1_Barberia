@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Servicios BarberPro</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <h1>Servicios de Barbería</h1>
+    </header>
+
+    <main class="container">
+        <section>
+            <table class="services-table">
+                <thead>
+                    <tr>
+                        <th>Detalle del Servicio</th>
+                        <th>Precio (₡)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="corte : ${cortes}">
+                        <td th:text="${corte.detalle}">Detalle</td>
+                        <td th:text="${corte.costo}">Precio</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 BarberPro. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${titulo}">BarberPro</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Lora&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <header class="header">
+        <h1>BarberPro</h1>
+        <h2>Donde la tradición se encuentra con el estilo</h2>
+    </header>
+
+    <main class="container">
+        <div th:replace="${contenido}"></div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 BarberPro. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+
+</html>
