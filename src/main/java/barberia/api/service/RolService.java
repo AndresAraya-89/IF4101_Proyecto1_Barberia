@@ -38,6 +38,7 @@ public class RolService {
             // Si el rol existe que realice una copia completa del objeto recibido por
             // parametro
             updatedRol = rol;
+            updatedRol.setIdRol(id);
             return rolRepository.save(updatedRol);
         } else {
             throw new RuntimeException("Rol no encontrada con ID: " + id);

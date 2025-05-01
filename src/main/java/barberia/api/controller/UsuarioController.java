@@ -2,6 +2,8 @@ package barberia.api.controller;
 
 import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import barberia.api.entity.Usuario;
@@ -23,10 +25,13 @@ public class UsuarioController {
         return usuarioService.get();
     }
 
+
     @GetMapping("/{idUsuario}")
     @Operation(summary = "Obtener un usuario por ID", description = "Busca un usuario en la base de datos según su ID")
-    public Optional<Usuario> getById(@PathVariable int id) {
-        return usuarioService.getById(id);
+    public ResponseEntity<Usuario> getById(@PathVariable("idUsuario") int id) {
+        return usuarioService.getById(id)
+                .map(usuario -> ResponseEntity.ok(usuario))
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
@@ -35,15 +40,22 @@ public class UsuarioController {
         return usuarioService.add(usuario);
     }
 
-    @Operation(summary = "Modificar un usuario", description = "Modifica un usuario existene en la base de datos")
+
+
     @PutMapping("/{idUsuario}")
-    public Usuario update(@PathVariable int id, @RequestBody Usuario usuario) {
-        return usuarioService.update(id, usuario);
+    @Operation(summary = "Modificar un usuario", description = "Actualiza un usuario a la base de datos")
+    public ResponseEntity<?> update(@PathVariable("idUsuario") int id, @RequestBody Usuario usuario) {
+        try {
+            Usuario updatedUsuario = usuarioService.update(id, usuario);
+            return ResponseEntity.ok(updatedUsuario);
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @Operation(summary = "Eliminar un usuario", description = "Elimina un usuario de la base de datos")
     @DeleteMapping("/{idUsuario}")
-    public void delete(@PathVariable int id) {
+    public void delete(@PathVariable ("idUsuario") int id) {
         usuarioService.delete(id);
     }
 }
