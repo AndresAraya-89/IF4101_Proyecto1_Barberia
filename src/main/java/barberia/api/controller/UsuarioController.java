@@ -41,7 +41,6 @@ public class UsuarioController {
     }
 
 
-
     @PutMapping("/{idUsuario}")
     @Operation(summary = "Modificar un usuario", description = "Actualiza un usuario a la base de datos")
     public ResponseEntity<?> update(@PathVariable("idUsuario") int id, @RequestBody Usuario usuario) {

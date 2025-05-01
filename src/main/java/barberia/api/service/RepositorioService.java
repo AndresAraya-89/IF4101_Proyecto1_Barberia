@@ -5,7 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import barberia.api.entity.Repositorio;
+import barberia.api.entity.Usuario;
 import barberia.api.repository.RepositorioRepository;
+import barberia.api.repository.UsuarioRepository;
 import lombok.AllArgsConstructor;
 
 @Service
@@ -14,8 +16,17 @@ public class RepositorioService {
 
     @Autowired
     private RepositorioRepository repositorioRepository;
+    private UsuarioRepository usuarioRepository;
 
     public Repositorio add(Repositorio repositorio) {
+        // Verifica si el usuario existe
+        Usuario usuario = usuarioRepository.findById(repositorio.getUsuario().getIdUsuario())
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + repositorio.getUsuario().getIdUsuario()));
+                
+        // Asigna el usuario completo al repositorio
+        repositorio.setUsuario(usuario);
+
+        // Guarda el usuario
         return repositorioRepository.save(repositorio);
     }
 
@@ -31,16 +42,28 @@ public class RepositorioService {
         repositorioRepository.deleteById(id);
     }
 
-    public Repositorio update(int id, Repositorio repositorio) {
-        Optional<Repositorio> existingRepositorio = repositorioRepository.findById(id);
-        if (existingRepositorio.isPresent()) {
-            Repositorio updatedRepositorio = existingRepositorio.get();
-            // Si el repositorio existe que realice una copia completa del objeto recibido
-            // por parametro
-            updatedRepositorio = repositorio;
-            return repositorioRepository.save(updatedRepositorio);
-        } else {
-            throw new RuntimeException("Repositorio no encontrada con ID: " + id);
+    public Repositorio update(int id, Repositorio repositorioActualizado) {
+        // 1. Buscar el repositorio existente
+        Repositorio repositorioExistente = repositorioRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Repositorio no encontrado con ID: " + id));
+    
+        // 2. Actualizar campos simples
+        repositorioExistente.setNombre(repositorioActualizado.getNombre());
+        repositorioExistente.setDescripcion(repositorioActualizado.getDescripcion());
+        repositorioExistente.setEstado(repositorioActualizado.getEstado());
+    
+        // 3. Actualizar relaciones (si el repositorio tiene alguna)
+        // Ejemplo si tuviera relación con Usuario:
+        
+        if (repositorioActualizado.getUsuario() != null) {
+            Usuario usuario = usuarioRepository.findById(
+                    repositorioActualizado.getUsuario().getIdUsuario())
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+            repositorioExistente.setUsuario(usuario);
         }
+        
+    
+        // 4. Guardar cambios
+        return repositorioRepository.save(repositorioExistente);
     }
 }
