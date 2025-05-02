@@ -5,7 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import barberia.api.entity.Horario;
+import barberia.api.entity.Usuario;
 import barberia.api.repository.HorarioRepository;
+import barberia.api.repository.UsuarioRepository;
 import lombok.AllArgsConstructor;
 
 @Service
@@ -14,8 +16,18 @@ public class HorarioService {
 
     @Autowired
     private HorarioRepository horarioRepository;
+    private UsuarioRepository usuarioRepository;
 
-    public Horario add(Horario horario) {
+     public Horario add(Horario horario) {
+        // Verifica si el usuario existe
+        Usuario usuario = usuarioRepository.findById(horario.getUsuario().getIdUsuario())
+                .orElseThrow(() -> new RuntimeException(
+                        "Repositorio no encontrado con ID: " + horario.getUsuario().getIdUsuario()));
+
+        // Asigna el repositorio al corte
+        horario.setUsuario(usuario);
+
+        // Guarda el corte
         return horarioRepository.save(horario);
     }
 
@@ -31,16 +43,27 @@ public class HorarioService {
         horarioRepository.deleteById(id);
     }
 
-    public Horario update(int id, Horario horario) {
-        Optional<Horario> existingHorario = horarioRepository.findById(id);
-        if (existingHorario.isPresent()) {
-            Horario updatedHorario = existingHorario.get();
-            // Si el horario existe que realice una copia completa del objeto recibido por
-            // parametro
-            updatedHorario = horario;
-            return horarioRepository.save(updatedHorario);
-        } else {
-            throw new RuntimeException("Horario no encontrada con ID: " + id);
+    public Horario update(int id, Horario horarioActualizado) {
+        //Buscar el horario existente
+        Horario horarioExistente = horarioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Horario no encontrado con ID: " + id));
+
+
+        //Actualizar relación con Usuario (barbero)
+        if (horarioActualizado.getUsuario() != null && horarioActualizado.getUsuario().getIdUsuario() != 0) {
+            Usuario barbero = usuarioRepository.findById(horarioActualizado.getUsuario().getIdUsuario())
+                    .orElseThrow(() -> new RuntimeException(
+                            "Barbero no encontrado con ID: " + horarioActualizado.getUsuario().getIdUsuario()));
+            horarioExistente.setUsuario(barbero);
         }
+
+        //Actualizar estado (si se proporciona) y horas con fecha
+            horarioExistente.setEstado(horarioActualizado.getEstado());
+            horarioExistente.setFecha(horarioActualizado.getFecha());
+            horarioExistente.setHoraFinal(horarioActualizado.getHoraFinal());
+            horarioExistente.setHoraInicio(horarioActualizado.getHoraInicio());
+
+        //Guardar cambios
+        return horarioRepository.save(horarioExistente);
     }
 }

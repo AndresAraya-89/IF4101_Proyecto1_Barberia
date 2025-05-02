@@ -44,7 +44,7 @@ public class CorteService {
     }
 
     public Corte update(int id, Corte corteActualizado) {
-        // 1. Buscar el corte existente
+        // Verifica si los objetos existen
         Corte corteExistente = corteRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Corte no encontrado con ID: " + id));
     
