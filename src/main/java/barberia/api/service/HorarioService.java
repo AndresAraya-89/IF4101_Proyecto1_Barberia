@@ -18,16 +18,14 @@ public class HorarioService {
     private HorarioRepository horarioRepository;
     private UsuarioRepository usuarioRepository;
 
-     public Horario add(Horario horario) {
+    public Horario add(Horario horario) {
         // Verifica si el usuario existe
         Usuario usuario = usuarioRepository.findById(horario.getUsuario().getIdUsuario())
                 .orElseThrow(() -> new RuntimeException(
                         "Repositorio no encontrado con ID: " + horario.getUsuario().getIdUsuario()));
 
-        // Asigna el repositorio al corte
         horario.setUsuario(usuario);
 
-        // Guarda el corte
         return horarioRepository.save(horario);
     }
 
@@ -44,12 +42,11 @@ public class HorarioService {
     }
 
     public Horario update(int id, Horario horarioActualizado) {
-        //Buscar el horario existente
+        // Buscar el horario existente
         Horario horarioExistente = horarioRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Horario no encontrado con ID: " + id));
 
-
-        //Actualizar relación con Usuario (barbero)
+        // Actualizar relación con Usuario (barbero)
         if (horarioActualizado.getUsuario() != null && horarioActualizado.getUsuario().getIdUsuario() != 0) {
             Usuario barbero = usuarioRepository.findById(horarioActualizado.getUsuario().getIdUsuario())
                     .orElseThrow(() -> new RuntimeException(
@@ -57,13 +54,12 @@ public class HorarioService {
             horarioExistente.setUsuario(barbero);
         }
 
-        //Actualizar estado (si se proporciona) y horas con fecha
-            horarioExistente.setEstado(horarioActualizado.getEstado());
-            horarioExistente.setFecha(horarioActualizado.getFecha());
-            horarioExistente.setHoraFinal(horarioActualizado.getHoraFinal());
-            horarioExistente.setHoraInicio(horarioActualizado.getHoraInicio());
+        // Actualizar estado
+        horarioExistente.setEstado(horarioActualizado.getEstado());
+        horarioExistente.setFecha(horarioActualizado.getFecha());
+        horarioExistente.setHoraFinal(horarioActualizado.getHoraFinal());
+        horarioExistente.setHoraInicio(horarioActualizado.getHoraInicio());
 
-        //Guardar cambios
         return horarioRepository.save(horarioExistente);
     }
 }

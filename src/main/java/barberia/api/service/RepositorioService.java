@@ -21,12 +21,11 @@ public class RepositorioService {
     public Repositorio add(Repositorio repositorio) {
         // Verifica si el usuario existe
         Usuario usuario = usuarioRepository.findById(repositorio.getUsuario().getIdUsuario())
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + repositorio.getUsuario().getIdUsuario()));
-                
-        // Asigna el usuario completo al repositorio
+                .orElseThrow(() -> new RuntimeException(
+                        "Usuario no encontrado con ID: " + repositorio.getUsuario().getIdUsuario()));
+
         repositorio.setUsuario(usuario);
 
-        // Guarda el usuario
         return repositorioRepository.save(repositorio);
     }
 
@@ -43,27 +42,23 @@ public class RepositorioService {
     }
 
     public Repositorio update(int id, Repositorio repositorioActualizado) {
-        // 1. Buscar el repositorio existente
+        // Buscar el repositorio existente
         Repositorio repositorioExistente = repositorioRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Repositorio no encontrado con ID: " + id));
-    
-        // 2. Actualizar campos simples
-        repositorioExistente.setNombre(repositorioActualizado.getNombre());
-        repositorioExistente.setDescripcion(repositorioActualizado.getDescripcion());
-        repositorioExistente.setEstado(repositorioActualizado.getEstado());
-    
-        // 3. Actualizar relaciones (si el repositorio tiene alguna)
-        // Ejemplo si tuviera relación con Usuario:
-        
+                .orElseThrow(() -> new RuntimeException("Repositorio no encontrado con ID: " + id));
+
+        // Actualizar relacion con usuario
         if (repositorioActualizado.getUsuario() != null) {
             Usuario usuario = usuarioRepository.findById(
                     repositorioActualizado.getUsuario().getIdUsuario())
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+                    .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
             repositorioExistente.setUsuario(usuario);
         }
-        
-    
-        // 4. Guardar cambios
+
+        // Actualizar campos simples
+        repositorioExistente.setNombre(repositorioActualizado.getNombre());
+        repositorioExistente.setDescripcion(repositorioActualizado.getDescripcion());
+        repositorioExistente.setEstado(repositorioActualizado.getEstado());
+
         return repositorioRepository.save(repositorioExistente);
     }
 }

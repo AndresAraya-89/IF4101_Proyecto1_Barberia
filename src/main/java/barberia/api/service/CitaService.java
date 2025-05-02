@@ -98,8 +98,8 @@ public class CitaService {
             citaExistente.setCorte(corte);
         }
 
-         // Actualizar relación con Horario
-         if (citaActualizado.getHorario() != null && citaActualizado.getHorario().getIdHorarario() != 0) {
+        // Actualizar relación con Horario
+        if (citaActualizado.getHorario() != null && citaActualizado.getHorario().getIdHorarario() != 0) {
             Horario horario = horarioRepository.findById(citaActualizado.getHorario().getIdHorarario())
                     .orElseThrow(() -> new RuntimeException(
                             "Horario no encontrado con ID: " + citaActualizado.getHorario().getIdHorarario()));
@@ -108,7 +108,6 @@ public class CitaService {
 
         citaExistente.setEstado(citaActualizado.getEstado());
 
-        // Guardar cambios
         return citaRepository.save(citaExistente);
     }
 }

@@ -43,7 +43,7 @@ public class CorteController {
     @PostMapping
     @Operation(summary = "Crear un nuevo corte", description = "Crea un corte a la base de datos")
     public ResponseEntity<?> add(
-            @RequestParam Integer idRepositorio, // Recibes el ID por parámetro (puede ser @RequestParam o parte de un DTO)
+            @RequestParam Integer idRepositorio, // Recibes el ID por parámetro
             @RequestBody Corte corte // Recibes el resto de datos del corte
     ) {
         try {
@@ -54,8 +54,7 @@ public class CorteController {
             // Asigna este repositorio al corte
             corte.setRepositorio(repositorio);
 
-            // Llama al servicio existente (que ya maneja la búsqueda del corte
-            // completo)
+            // Llama al servicio existente 
             Corte corteGuardado = corteService.add(corte);
             return ResponseEntity.ok(corteGuardado);
 

@@ -35,8 +35,7 @@ public class RolService {
         Optional<Rol> existingRol = rolRepository.findById(id);
         if (existingRol.isPresent()) {
             Rol updatedRol = existingRol.get();
-            // Si el rol existe que realice una copia completa del objeto recibido por
-            // parametro
+            // Si el rol existe que realice una copia completa del objeto
             updatedRol = rol;
             updatedRol.setIdRol(id);
             return rolRepository.save(updatedRol);

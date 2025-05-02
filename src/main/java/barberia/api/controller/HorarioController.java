@@ -48,8 +48,7 @@ public class HorarioController {
             // Asigna este usuario al horario
             horario.setUsuario(usuario);
 
-            // Llama al servicio existente (que ya maneja la búsqueda del usuario
-            // completo)
+            // Llama al servicio existente 
             Horario horarioGuardado = horarioService.add(horario);
             return ResponseEntity.ok(horarioGuardado);
 

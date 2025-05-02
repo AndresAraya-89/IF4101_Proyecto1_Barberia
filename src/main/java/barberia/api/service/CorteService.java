@@ -24,10 +24,8 @@ public class CorteService {
                 .orElseThrow(() -> new RuntimeException(
                         "Repositorio no encontrado con ID: " + corte.getRepositorio().getIdRepositorio()));
 
-        // Asigna el repositorio al corte
         corte.setRepositorio(repositorio);
 
-        // Guarda el corte
         return corteRepository.save(corte);
     }
 
@@ -46,23 +44,22 @@ public class CorteService {
     public Corte update(int id, Corte corteActualizado) {
         // Verifica si los objetos existen
         Corte corteExistente = corteRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Corte no encontrado con ID: " + id));
-    
-        // 2. Actualizar campos simples
-        corteExistente.setCosto(corteActualizado.getCosto());
-        corteExistente.setDetalle(corteActualizado.getDetalle());
-        corteExistente.setUrl_imagen(corteActualizado.getUrl_imagen());
-    
-        // 3. Actualizar repositorio (con validación)
+                .orElseThrow(() -> new RuntimeException("Corte no encontrado con ID: " + id));
+
+        // Actualizar repositorio
         if (corteActualizado.getRepositorio() != null) {
             Repositorio repositorio = repositorioRepository.findById(
                     corteActualizado.getRepositorio().getIdRepositorio())
-                .orElseThrow(() -> new RuntimeException("Repositorio no encontrado"));
-            
+                    .orElseThrow(() -> new RuntimeException("Repositorio no encontrado"));
+
             corteExistente.setRepositorio(repositorio);
         }
-    
-        // 4. Guardar cambios
+
+        // Actualizar campos simples
+        corteExistente.setCosto(corteActualizado.getCosto());
+        corteExistente.setDetalle(corteActualizado.getDetalle());
+        corteExistente.setUrl_imagen(corteActualizado.getUrl_imagen());
+
         return corteRepository.save(corteExistente);
     }
 

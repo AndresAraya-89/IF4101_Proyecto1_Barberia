@@ -49,8 +49,7 @@ public class RepositorioController {
             // Asigna este usuario al repositorio
             repositorio.setUsuario(usuario);
 
-            // Llama al servicio existente (que ya maneja la búsqueda del usuario
-            // completo)
+            // Llama al servicio existente 
             Repositorio repositorioGuardado = repositorioService.add(repositorio);
             return ResponseEntity.ok(repositorioGuardado);
 

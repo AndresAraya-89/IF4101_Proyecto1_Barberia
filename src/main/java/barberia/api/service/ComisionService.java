@@ -34,8 +34,7 @@ public class ComisionService {
         Optional<Comision> existingComision = comisionRepository.findById(id);
         if (existingComision.isPresent()) {
             Comision updatedComision = existingComision.get();
-            // Si la comision existe que realice una copia completa del objeto recibido por
-            // parametro
+            // Si la comision existe que realice una copia completa del objeto
             updatedComision = comision;
             return comisionRepository.save(updatedComision);
         } else {
