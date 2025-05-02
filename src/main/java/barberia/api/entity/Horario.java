@@ -18,10 +18,10 @@ public class Horario {
     @JoinColumn(name = "idUsuario") //Usuario de tipo barbero
     private Usuario usuario;
 
-    @Column(name = "horaInicio", nullable = false)
+    @Column(name = "horaInicio", nullable = false) //12:00
     private String horaInicio;
 
-    @Column(name = "horaFinal", nullable = false)
+    @Column(name = "horaFinal", nullable = false) //14:00
     private String horaFinal;
 
     @Column(name = "fecha", nullable = false) //Anteriormente estaba dia pero no es lo suficiente mente significativo

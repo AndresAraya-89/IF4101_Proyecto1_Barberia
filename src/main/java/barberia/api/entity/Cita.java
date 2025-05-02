@@ -29,4 +29,7 @@ public class Cita {
     @ManyToOne()
     @JoinColumn(name = "idHorario")
     private Horario horario;
+
+    @Column(name = "estado", nullable = false)
+    private int estado;
 }
