@@ -16,6 +16,7 @@ public class RepositorioService {
 
     @Autowired
     private RepositorioRepository repositorioRepository;
+    @Autowired
     private UsuarioRepository usuarioRepository;
 
     public Repositorio add(Repositorio repositorio) {

@@ -17,15 +17,12 @@ import lombok.AllArgsConstructor;
 @Service
 @AllArgsConstructor
 public class FacturaService {
-      @Autowired
+    @Autowired
     private FacturaRepository facturaRepository;
-
     @Autowired
     private CitaRepository citaRepository;
-
     @Autowired
     private ComisionService comisionService;
-
 
     public Factura add(Factura factura) {
         // Verifica si la cita existe
@@ -42,20 +39,18 @@ public class FacturaService {
         factura.setEstado(1);
 
         generarComision(factura.getIdCita().getUsuarioBarbero(), montoPagar);
-        
+
         return facturaRepository.save(factura);
     }
 
-    
-    public void generarComision(Usuario barbero, double monto){
+    public void generarComision(Usuario barbero, double monto) {
         Comision comision = new Comision();
         comision.setUsuario(barbero);
         comision.setMonto(monto);
         comision.setEstado(1); // 1 = Pendiente de pago
-        
+
         comisionService.add(comision);
     }
-
 
     public List<Factura> get() {
         return facturaRepository.findAll();

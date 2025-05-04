@@ -19,13 +19,10 @@ import lombok.AllArgsConstructor;
 public class CitaService {
     @Autowired
     private CitaRepository citaRepository;
-
     @Autowired
     private UsuarioRepository usuarioRepository;
-
     @Autowired
     private CorteRepository corteRepository;
-
     @Autowired
     private HorarioRepository horarioRepository;
 

@@ -20,7 +20,6 @@ public class FacturaController {
     @Autowired
     private FacturaService facturaService;
 
-
     @GetMapping
     @Operation(summary = "Obtener todas las facturas", description = "Devuelve una lista de facturas")
     public List<Factura> get() {
@@ -59,13 +58,13 @@ public class FacturaController {
 
     @Operation(summary = "Modificar una factura", description = "Modifica una factura existene en la base de datos")
     @PutMapping("/{idFactura}")
-    public Factura update(@PathVariable ("idFactura") int id, @RequestBody Factura factura) {
+    public Factura update(@PathVariable("idFactura") int id, @RequestBody Factura factura) {
         return facturaService.update(id, factura);
     }
 
     @Operation(summary = "Eliminar una factura", description = "Elimina una factura de la base de datos")
     @DeleteMapping("/{idFactura}")
-    public void delete(@PathVariable ("idFactura") int id) {
+    public void delete(@PathVariable("idFactura") int id) {
         facturaService.delete(id);
     }
 }

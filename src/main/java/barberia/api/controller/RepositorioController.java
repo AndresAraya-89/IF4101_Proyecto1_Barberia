@@ -34,7 +34,6 @@ public class RepositorioController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-
     @PostMapping
     @Operation(summary = "Crear un nuevo repositorio")
     public ResponseEntity<?> add(
@@ -49,7 +48,7 @@ public class RepositorioController {
             // Asigna este usuario al repositorio
             repositorio.setUsuario(usuario);
 
-            // Llama al servicio existente 
+            // Llama al servicio existente
             Repositorio repositorioGuardado = repositorioService.add(repositorio);
             return ResponseEntity.ok(repositorioGuardado);
 
@@ -58,21 +57,20 @@ public class RepositorioController {
         }
     }
 
-   @PutMapping("/{idRepositorio}")
+    @PutMapping("/{idRepositorio}")
     @Operation(summary = "Modificar un repositorio", description = "Actualiza un repositorio a la base de datos")
     public ResponseEntity<?> update(@PathVariable("idRepositorio") int id, @RequestBody Repositorio Repositorio) {
         try {
             Repositorio updatedRepositorio = repositorioService.update(id, Repositorio);
             return ResponseEntity.ok(updatedRepositorio);
-        } catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 
-
     @Operation(summary = "Eliminar un rrepositorio", description = "Elimina un repositorio de la base de datos")
     @DeleteMapping("/{idRepositorio}")
-    public void delete(@PathVariable ("idRepositorio") int id) {
+    public void delete(@PathVariable("idRepositorio") int id) {
         repositorioService.delete(id);
     }
 }

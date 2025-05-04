@@ -4,9 +4,9 @@ import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 
 import barberia.api.entity.Corte;
 import barberia.api.entity.Repositorio;
@@ -17,7 +17,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @CrossOrigin(origins = "*") // Permitir acceso desde cualquier origen
 @Tag(name = "Corte", description = "API para gestionar cortes") // Grupo en Swagger
 @RestController
-@Controller
+//@Controller
 @RequestMapping("/corte")
 public class CorteController {
     @Autowired
@@ -29,34 +29,14 @@ public class CorteController {
         return corteService.get();
     }
 
-    @GetMapping("/services")
-    @Operation(summary = "Obtener todas los cortes en el thyleaf", description = "Devuelve una lista de cortes en el thyleaf")
-    public String mostrarServices(Model model) {
-        /*
-         * List<Corte> cortes = corteService.get();
-         * model.addAttribute("cortes", cortes);
-         * return "services";
-         */
-
-        // Datos de prueba hardcodeados (elimina después de la prueba)
-        List<Corte> cortes = List.of(
-                new Corte(),
-                new Corte(),
-                new Corte());
-
-        model.addAttribute("cortes", cortes);
-        return "services";
+    // Endpoint para mostrar la vista HTML con datos
+    @GetMapping("/listar")
+    public String listarCortes(Model model) {
+        List<Corte> cortes = corteService.get();
+        model.addAttribute("cortes", cortes); // Asegúrate que este nombre coincida con el HTML
+        return "corte"; // Nombre del template sin extensión
     }
 
-    @Controller
-    public class TestController {
-
-        @GetMapping("/services")
-        public String test(Model model) {
-            model.addAttribute("message", "¡Funciona!");
-            return "services";
-        }
-    }
 
     @GetMapping("/{idCorte}")
     @ResponseBody
@@ -66,16 +46,6 @@ public class CorteController {
                 .map(corte -> ResponseEntity.ok(corte))
                 .orElse(ResponseEntity.notFound().build());
     }
-
-    /*
-     * @PostMapping
-     * 
-     * @Operation(summary = "Crear un nuevo corte", description =
-     * "Agrega un nuevo corte a la base de datos")
-     * public Corte add(@RequestBody Corte corte) {
-     * return corteService.add(corte);
-     * }
-     */
 
     @PostMapping
     @Operation(summary = "Crear un nuevo corte", description = "Crea un corte a la base de datos")

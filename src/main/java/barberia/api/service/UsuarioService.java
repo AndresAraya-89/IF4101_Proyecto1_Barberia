@@ -13,28 +13,55 @@ import lombok.AllArgsConstructor;
 @Service
 @AllArgsConstructor
 public class UsuarioService {
+
     @Autowired
     private UsuarioRepository usuarioRepository;
+    @Autowired
     private RolRepository rolRepository;
 
-    //public Usuario add(Usuario usuario) {
-    //    return usuarioRepository.save(usuario);
-    //}
+    // public Usuario add(Usuario usuario) {
+    // return usuarioRepository.save(usuario);
+    // }
 
-     public Usuario add(Usuario usuario) {
+    public Usuario add(Usuario usuario) {
         // Verifica si el Rol existe
         Rol rol = rolRepository.findById(usuario.getRol().getIdRol())
                 .orElseThrow(() -> new RuntimeException("Rol no encontrado con ID: " + usuario.getRol().getIdRol()));
-                
+
         // Asigna el Rol completo al Usuario
         usuario.setRol(rol);
 
-        // Guarda el Usuario
         return usuarioRepository.save(usuario);
     }
 
     public List<Usuario> get() {
         return usuarioRepository.findAll();
+    }
+
+    public List<Usuario> getBarberos() {
+        List <Usuario> listaGeneral  = usuarioRepository.findAll();
+        List <Usuario> listaBarberos = new ArrayList<>();
+
+        for (int i = 0; i < listaGeneral.size(); i++){
+            if (listaGeneral.get(i).getEstado() == 2){
+                listaBarberos.add(listaGeneral.get(i));
+            }
+        }
+
+        return listaBarberos;
+    }
+
+    public List<Usuario> getClientes() {
+        List <Usuario> listaGeneral  = usuarioRepository.findAll();
+        List <Usuario> listaClientes = new ArrayList<>();
+
+        for (int i = 0; i < listaGeneral.size(); i++){
+            if (listaGeneral.get(i).getEstado() == 3){
+                listaClientes.add(listaGeneral.get(i));
+            }
+        }
+
+        return listaClientes;
     }
 
     public Optional<Usuario> getById(int id) {
