@@ -27,8 +27,11 @@ public class ComisionService {
                         "Usuario no encontrado con ID: " + comision.getUsuario().getIdUsuario()));
 
         String fechaHora = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        double monto = comision.getMonto() * 0.50; //50% del corte de comision para el barbero
+
         comision.setFechaHoraDeposito(fechaHora);
         comision.setUsuario(usuario);
+        comision.setMonto(monto);
 
         return comisionRepository.save(comision);
     }
