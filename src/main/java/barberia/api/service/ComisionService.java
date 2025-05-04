@@ -1,11 +1,15 @@
 package barberia.api.service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import barberia.api.entity.Comision;
+import barberia.api.entity.Usuario;
 import barberia.api.repository.ComisionRepository;
+import barberia.api.repository.UsuarioRepository;
 import lombok.AllArgsConstructor;
 
 @Service
@@ -13,8 +17,19 @@ import lombok.AllArgsConstructor;
 public class ComisionService {
     @Autowired
     private ComisionRepository comisionRepository;
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     public Comision add(Comision comision) {
+        // Verifica si el usuario existe
+        Usuario usuario = usuarioRepository.findById(comision.getUsuario().getIdUsuario())
+                .orElseThrow(() -> new RuntimeException(
+                        "Usuario no encontrado con ID: " + comision.getUsuario().getIdUsuario()));
+
+        String fechaHora = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        comision.setFechaHoraDeposito(fechaHora);
+        comision.setUsuario(usuario);
+
         return comisionRepository.save(comision);
     }
 
@@ -34,8 +49,13 @@ public class ComisionService {
         Optional<Comision> existingComision = comisionRepository.findById(id);
         if (existingComision.isPresent()) {
             Comision updatedComision = existingComision.get();
-            // Si la comision existe que realice una copia completa del objeto
-            updatedComision = comision;
+
+            // Si la comision existe que realice una copia
+            String fechaHora = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+            updatedComision.setFechaHoraDeposito(fechaHora);
+            updatedComision.setEstado(comision.getEstado());
+            updatedComision.setMonto(comision.getMonto());
+            updatedComision.setUsuario(comision.getUsuario());
             return comisionRepository.save(updatedComision);
         } else {
             throw new RuntimeException("Comision no encontrada con ID: " + id);

@@ -30,6 +30,8 @@ public class CorteService {
     }
 
     public List<Corte> get() {
+        List<Corte> cortes = corteRepository.findAll(); // ¿Retorna datos?
+        System.out.println("Datos desde BD: " + cortes.size());
         return corteRepository.findAll();
     }
 
