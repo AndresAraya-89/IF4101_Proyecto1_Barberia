@@ -44,7 +44,7 @@ public class CitaController {
             @RequestParam Integer idCorte,
             @RequestParam Integer idHorario,
             @RequestBody Cita cita // Recibes el resto de datos del repositorio
-    ) {
+    ) {  
         try {
             // Crea los objetos
             Usuario usuarioCliente = new Usuario();

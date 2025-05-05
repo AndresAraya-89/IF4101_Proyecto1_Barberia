@@ -32,4 +32,52 @@ public class Cita {
 
     @Column(name = "estado", nullable = false)
     private int estado;
+
+    public int getIdCita() {
+        return idCita;
+    }
+
+    public void setIdCita(int idCita) {
+        this.idCita = idCita;
+    }
+
+    public Usuario getUsuarioCliente() {
+        return usuarioCliente;
+    }
+
+    public void setUsuarioCliente(Usuario usuarioCliente) {
+        this.usuarioCliente = usuarioCliente;
+    }
+
+    public Usuario getUsuarioBarbero() {
+        return usuarioBarbero;
+    }
+
+    public void setUsuarioBarbero(Usuario usuarioBarbero) {
+        this.usuarioBarbero = usuarioBarbero;
+    }
+
+    public Corte getCorte() {
+        return corte;
+    }
+
+    public void setCorte(Corte corte) {
+        this.corte = corte;
+    }
+
+    public Horario getHorario() {
+        return horario;
+    }
+
+    public void setHorario(Horario horario) {
+        this.horario = horario;
+    }
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
 }

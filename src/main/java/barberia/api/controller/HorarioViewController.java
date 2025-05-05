@@ -18,7 +18,7 @@ public class HorarioViewController {
     public HorarioViewController(HorarioService horarioService, UsuarioService usuarioService) {
         this.horarioService = horarioService;
         this.usuarioService = usuarioService;
-    }
+    } 
 
     // Listar todos los horarios (READ)
     @GetMapping

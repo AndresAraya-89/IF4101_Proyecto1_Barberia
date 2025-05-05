@@ -18,7 +18,7 @@ public class ComisionViewController {
     public ComisionViewController(ComisionService comisionService, UsuarioService usuarioService) {
         this.comisionService = comisionService;
         this.usuarioService = usuarioService;
-    }
+    } 
 
     // Listar todas las comisiones (READ)
     @GetMapping

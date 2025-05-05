@@ -16,7 +16,7 @@ public class CorteViewController {
         this.corteService = corteService;
     }
 
-    // Listar todos los cortes (READ)
+    // Listar todos los cortes (READ) 
     @GetMapping
     public String listarCortes(Model model) {
         model.addAttribute("cortes", corteService.get());

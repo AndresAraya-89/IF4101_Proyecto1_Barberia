@@ -33,7 +33,7 @@ public class ComisionController {
                 .map(comision -> ResponseEntity.ok(comision))
                 .orElse(ResponseEntity.notFound().build());
     }
-
+ 
     @PostMapping
     @Operation(summary = "Crear una nueva comision", description = "Agrega una nueva comision a la base de datos")
     public ResponseEntity<?> add(

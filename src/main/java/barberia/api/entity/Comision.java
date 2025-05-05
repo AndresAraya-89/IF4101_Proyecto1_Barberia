@@ -27,4 +27,43 @@ public class Comision {
     @Column(name = "estado", nullable = false)
     private int estado;
 
+    public int getIdComision() {
+        return idComision;
+    }
+
+    public void setIdComision(int idComision) {
+        this.idComision = idComision;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getFechaHoraDeposito() {
+        return fechaHoraDeposito;
+    }
+
+    public void setFechaHoraDeposito(String fechaHoraDeposito) {
+        this.fechaHoraDeposito = fechaHoraDeposito;
+    }
+
+    public double getMonto() {
+        return monto;
+    }
+
+    public void setMonto(double monto) {
+        this.monto = monto;
+    }
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
 }

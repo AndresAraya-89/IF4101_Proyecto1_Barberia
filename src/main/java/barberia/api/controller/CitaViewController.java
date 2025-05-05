@@ -21,7 +21,7 @@ public class CitaViewController {
         this.usuarioService = usuarioService;
         this.corteService = corteService;
         this.horarioService = horarioService;
-    }
+    } 
 
     // Listar todas las citas (READ)
     @GetMapping

@@ -64,7 +64,7 @@ public class CorteController {
             // Llama al servicio existente
             Corte corteGuardado = corteService.add(corte);
             return ResponseEntity.ok(corteGuardado);
-
+ 
         } catch (RuntimeException ex) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
         }

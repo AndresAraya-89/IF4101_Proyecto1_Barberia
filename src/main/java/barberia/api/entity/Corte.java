@@ -30,4 +30,51 @@ public class Corte {
     @Column(name = "estado", nullable = false)
     private int estado;
 
+    public int getIdCorte() {
+        return idCorte;
+    }
+
+    public void setIdCorte(int idCorte) {
+        this.idCorte = idCorte;
+    }
+
+    public Repositorio getRepositorio() {
+        return repositorio;
+    }
+
+    public void setRepositorio(Repositorio repositorio) {
+        this.repositorio = repositorio;
+    }
+
+    public String getDetalle() {
+        return detalle;
+    }
+
+    public void setDetalle(String detalle) {
+        this.detalle = detalle;
+    }
+
+    public String getUrl_imagen() {
+        return url_imagen;
+    }
+
+    public void setUrl_imagen(String url_imagen) {
+        this.url_imagen = url_imagen;
+    }
+
+    public double getCosto() {
+        return costo;
+    }
+
+    public void setCosto(double costo) {
+        this.costo = costo;
+    }
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
 }

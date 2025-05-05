@@ -27,4 +27,43 @@ public class Repositorio {
     @Column(name = "estado", nullable = false)
     private int estado;
 
+    public int getIdRepositorio() {
+        return idRepositorio;
+    } 
+
+    public void setIdRepositorio(int idRepositorio) {
+        this.idRepositorio = idRepositorio;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
 }
