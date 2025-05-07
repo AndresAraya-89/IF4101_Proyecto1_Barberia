@@ -25,6 +25,7 @@
                         <th>Teléfono</th>
                         <th>Rol</th>
                         <th>Estado</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,9 +36,16 @@
                         <td th:text="${usuario.telefono}">8888-8888</td>
                         <td th:text="${usuario.rol.nombre}">ADMIN</td>
                         <td th:text="${usuario.estado == 1 ? 'Activo' : 'Inactivo'}">Activo</td>
+                        <td>
+                            <a th:href="@{/vista/usuarios/editar/{id}(id=${usuario.idUsuario})}"
+                                class="btn btn-sm btn-warning">Editar</a>
+                            <a th:href="@{/vista/usuarios/eliminar/{id}(id=${usuario.idUsuario})}"
+                                class="btn btn-sm btn-danger"
+                                onclick="return confirm('¿Estás seguro de que deseas eliminar este usuario?')">Eliminar</a>
+                        </td>
                     </tr>
                     <tr th:if="${#lists.isEmpty(usuarios)}">
-                        <td colspan="6" class="text-center text-muted">No hay usuarios registrados.</td>
+                        <td colspan="7" class="text-center text-muted">No hay usuarios registrados.</td>
                     </tr>
                 </tbody>
             </table>
@@ -77,13 +85,8 @@
                     </select>
                 </div>
 
-                <div class="mb-3">
-                    <label for="estado" class="form-label">Estado</label>
-                    <select class="form-select" id="estado" th:field="*{estado}">
-                        <option value="1">Activo</option>
-                        <option value="0">Inactivo</option>
-                    </select>
-                </div>
+                <!-- Campo oculto: estado activo por defecto -->
+                <input type="hidden" th:field="*{estado}" value="1" />
 
                 <div class="d-grid">
                     <button type="submit" class="btn btn-primary">Guardar Usuario</button>
@@ -94,4 +97,4 @@
 
 </body>
 
-</html>
+</html> 

@@ -50,12 +50,15 @@
                             </select>
                         </div>
 
+                        <!-- Campo oculto para establecer el estado en 1 (activo) -->
+                        <input type="hidden" th:field="*{estado}" value="1" />
+
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary w-100">Registrar</button>
                         </div>
                     </form>
 
-                    <p class="mt-3 text-center">¿Ya tienes cuenta? <a href="/vista/login">Inicia sesión</a></p>
+                    <p class="mt-3 text-center">¿Ya tienes cuenta? <a th:href="@{/vista/login}">Inicia sesión</a></p>
                 </div>
             </div>
         </div>
