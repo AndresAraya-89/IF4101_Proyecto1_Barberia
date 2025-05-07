@@ -6,9 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 import jakarta.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class LoginController {
@@ -19,6 +18,7 @@ public class LoginController {
     @PostMapping("/login")
     public String procesarLogin(@RequestParam String correo, @RequestParam String contrasena, HttpSession session) {
         List<Usuario> usuarios = usuarioService.get();
+
         for (Usuario usuario : usuarios) {
             if (usuario.getCorreo().equalsIgnoreCase(correo) && usuario.getContrasena().equals(contrasena)) {
                 session.setAttribute("usuario", usuario);
@@ -31,13 +31,15 @@ public class LoginController {
                     case "BARBERO":
                         return "redirect:/vista/citas";
                     case "CLIENTE":
-                        return "redirect:/vista/citas";
+                        return "redirect:/vista/services";
                     default:
                         return "redirect:/error";
                 }
             }
         }
 
-        return "redirect:/login?error=true"; // Si no encuentra usuario válido
+        // ❗ Si no se encontró usuario válido
+        return "redirect:/vista/login?error=true";
     }
 }
+ 
