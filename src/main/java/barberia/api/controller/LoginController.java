@@ -2,11 +2,11 @@ package barberia.api.controller;
 
 import barberia.api.entity.Usuario;
 import barberia.api.service.UsuarioService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import jakarta.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -15,7 +15,8 @@ public class LoginController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @PostMapping("/login")
+    // Procesar login (⚠️ distinta ruta para evitar conflicto con GET)
+    @PostMapping("/procesar-login")
     public String procesarLogin(@RequestParam String correo, @RequestParam String contrasena, HttpSession session) {
         List<Usuario> usuarios = usuarioService.get();
 
@@ -31,7 +32,7 @@ public class LoginController {
                     case "BARBERO":
                         return "redirect:/vista/citas";
                     case "CLIENTE":
-                        return "redirect:/vista/services";
+                        return "redirect:/vista/servicios";
                     default:
                         return "redirect:/error";
                 }
@@ -42,4 +43,3 @@ public class LoginController {
         return "redirect:/vista/login?error=true";
     }
 }
- 

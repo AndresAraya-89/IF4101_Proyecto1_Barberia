@@ -22,7 +22,7 @@
                     <div class="card-body p-4">
                         <h3 class="text-center mb-4">Iniciar Sesión</h3>
 
-                        <form th:action="@{/login}" method="post">
+                        <form th:action="@{/procesar-login}" method="post">
                             <div class="form-floating mb-3">
                                 <input type="email" class="form-control" id="correo" name="correo"
                                     placeholder="Correo electrónico" required>
@@ -35,6 +35,7 @@
                                 <label for="contrasena">Contraseña</label>
                             </div>
 
+                            <!-- Mensaje de error si las credenciales son inválidas -->
                             <div th:if="${error}" class="alert alert-danger text-center py-2" th:text="${error}"></div>
 
                             <div class="d-grid mb-3">

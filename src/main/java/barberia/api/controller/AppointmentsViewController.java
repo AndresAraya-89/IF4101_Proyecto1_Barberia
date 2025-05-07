@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,7 +19,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/vista/citas")
 public class AppointmentsViewController {
 
-    @Autowired
+    @Autowired 
     private CitaService citaService;
 
     @Autowired
@@ -31,8 +32,13 @@ public class AppointmentsViewController {
     private HorarioService horarioService;
 
     @GetMapping
-    public String mostrarCitas(Model model) {
-        Usuario usuario = usuarioService.getById(1).orElseThrow(); // ⚠️ Reemplazar con usuario autenticado
+    public String mostrarCitas(HttpSession session, Model model) {
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+
+        if (usuario == null) {
+            return "redirect:/vista/login";
+        }
+
         List<Cita> citas = citaService.get();
 
         List<Cita> citasFiltradas = citas.stream().filter(c -> {
