@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Citas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <table class="table table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Cita</th>
+                <th>Fecha Emision</th>
+                <th>Metodo pago</th>
+                <th>Total</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="factura : ${facturas}">
+                <td th:text="${factura.idFactura}">ID</td>
+                <td th:text="${factura.idCita?.idCita}">Id cita</td>
+                <td th:text="${factura.fechaHora}">Fecha emision</td>
+                <td th:text="${factura.metodoPago}">Metodo de pago</td>
+                <td th:text="${factura.total}">Total</td>
+                <td>
+                    <span th:switch="${factura.estado}" class="badge">
+                        <span th:case="0" class="badge bg-warning text-dark">Pendiente</span>
+                        <span th:case="1" class="badge bg-success">Completada</span>
+                        <span th:case="2" class="badge bg-danger">Cancelada</span>
+                        <span th:case="*" class="badge bg-secondary">Desconocido</span>
+                    </span>
+                </td>
+                <td>
+                    <div class="btn-group" role="group">
+                        <!-- Botón Editar (se mantiene igual) -->
+                        <a th:href="@{/view/facturas/editar/{id}(id=${factura.idFactura})}" 
+                           class="btn btn-sm btn-primary me-1">
+                           Editar
+                        </a>
+                        
+                        <!-- Botón Eliminar (ahora con formulario POST) -->
+                        <a th:href="@{/view/facturas/eliminar/{id}(id=${factura.idFactura})}" 
+                              method="post"
+                              style="display: inline;">
+                            <input type="hidden" name="_method" value="delete" /> <!-- Para soportar DELETE -->
+                            <button type="submit" class="btn btn-sm btn-danger" 
+                                    onclick="return confirm('¿Está seguro de eliminar esta factura?')">
+                                Eliminar
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            <tr th:if="${citas.empty}">
+                <td colspan="8" class="text-center">No hay facturas registradas</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
