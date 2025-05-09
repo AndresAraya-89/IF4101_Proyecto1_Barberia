@@ -1,42 +1,85 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BarberPro | Estilo y Tradición</title>
 
-    <!-- Bootstrap 5 (solo estructura) -->
+    <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Fuente personalizada -->
+    <!-- Fuentes -->
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Lora&display=swap"
         rel="stylesheet">
 
-    <!-- CSS personalizado -->
+    <!-- Estilo personalizado -->
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 
 <body>
 
-    <!-- Encabezado -->
-    <header class="header">
-        <h1>Bienvenido a BarberPro</h1>
-        <h2>Donde la tradición se encuentra con el estilo</h2>
-    </header>
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg px-4">
+        <div class="container">
+            <a class="navbar-brand text-white fw-bold" href="/">BarberPro</a>
+            <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
+                aria-label="Mostrar navegación">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-    <!-- Contenido principal -->
-    <main class="container">
-        <section class="hero">
-            <p class="hero-text">Confía en los expertos en barbería tradicional y moderna.</p>
-            <a href="/vista/servicios" class="button">Nuestros Servicios</a>
-        </section>
-    </main>
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link text-white fw-bold"
+                            href="http://localhost:8080/view/cortes">Servicios</a></li>
+                    <li class="nav-item"><a class="nav-link text-white fw-bold" href="/vista/citas">Citas</a></li>
+                </ul>
+                <a class="btn btn-outline-light fw-bold" href="/vista/login">Iniciar Sesión</a>
+            </div>
+        </div>
+    </nav>
 
-    <!-- Pie de página -->
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="mb-3">Bienvenido a BarberPro</h1>
+            <p class="hero-text">Donde la tradición se encuentra con el estilo.</p>
+            <a href="http://localhost:8080/view/cortes" class="button">Nuestros Servicios</a>
+        </div>
+    </section>
+
+    <!-- Información -->
+    <section class="container py-5">
+        <div class="row text-center">
+            <div class="col-md-4 mb-4">
+                <div class="card p-4 shadow-sm border-0">
+                    <h4>✂️ Expertos Barberos</h4>
+                    <p>Contamos con un equipo profesional que domina desde cortes clásicos hasta estilos modernos.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card p-4 shadow-sm border-0">
+                    <h4>📅 Reserva Fácil</h4>
+                    <p>Gestiona tus citas de forma rápida y desde cualquier dispositivo.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card p-4 shadow-sm border-0">
+                    <h4>💈 Estilo Personalizado</h4>
+                    <p>Nos adaptamos a tu estilo y personalidad para darte el mejor resultado.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer class="footer">
         <p>&copy; 2025 BarberPro. Todos los derechos reservados.</p>
     </footer>
+
+    <!-- Scripts Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 
