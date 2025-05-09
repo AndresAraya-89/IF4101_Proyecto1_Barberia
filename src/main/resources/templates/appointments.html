@@ -93,6 +93,8 @@
                                 <td th:text="${cita.corte.detalle}">Corte</td>
                                 <td th:text="${cita.horario.descripcion}">Horario</td>
                                 <td class="text-center">
+                                    <a th:href="@{/vista/citas/editar/{id}(id=${cita.idCita})}" 
+                                        class="btn btn-sm btn-warning me-1">Editar</a>
                                     <a th:href="@{/vista/citas/eliminar/{id}(id=${cita.idCita})}"
                                         class="btn btn-sm btn-danger"
                                         onclick="return confirm('¿Estás seguro?')">Eliminar</a>
