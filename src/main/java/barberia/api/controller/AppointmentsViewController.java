@@ -69,4 +69,26 @@ public class AppointmentsViewController {
         citaService.delete(id);
         return "redirect:/vista/citas";
     }
+    @GetMapping("/editar/{id}")
+public String mostrarFormularioEditar(@PathVariable("id") int id, Model model) {
+    Cita cita = citaService.getById(id).orElseThrow();
+    model.addAttribute("cita", cita);
+
+    model.addAttribute("clientes", usuarioService.get().stream()
+            .filter(u -> u.getRol().getNombre().equals("CLIENTE")).collect(Collectors.toList()));
+    model.addAttribute("barberos", usuarioService.get().stream()
+            .filter(u -> u.getRol().getNombre().equals("BARBERO")).collect(Collectors.toList()));
+    model.addAttribute("cortes", corteService.get());
+    model.addAttribute("horarios", horarioService.get());
+
+    return "editar-cita";
+}
+
+@PostMapping("/editar/{id}")
+public String actualizarCita(@PathVariable("id") int id, @ModelAttribute("cita") Cita cita) {
+    cita.setIdCita(id); // Asegurar que se setea el ID
+    citaService.update(cita); // Este método debe existir en tu servicio
+    return "redirect:/vista/citas";
+}
+
 }
